@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import shortid from 'shortid';
 import { TiUserAddOutline } from 'react-icons/ti';
 import Notiflix from 'notiflix';
 import styles from './styles.module.css';
 // import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getItems, addContacts } from 'redux/contactsSlice';
+import {
+    useCreateContactMutation,
+    useGetContactsQuery,
+} from 'redux/contactsApi';
 
 Notiflix.Notify.init({
     position: 'center-top',
@@ -15,21 +16,27 @@ Notiflix.Notify.init({
 });
 
 export default function Form() {
+    const [createContact] = useCreateContactMutation();
+    const { data } = useGetContactsQuery();
+
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
-    const [isDisabled, setIsDisabled] = useState('false');
-    const dispatch = useDispatch();
-    const contacts = useSelector(getItems);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const reset = () => {
         setName('');
         setNumber('');
     };
 
+    useEffect(() => {
+        name.length > 0 && number.length > 0
+            ? setIsDisabled(false)
+            : setIsDisabled(true);
+    }, [name, number]);
+
     const handleSubmit = e => {
         e.preventDefault();
         const contact = {
-            id: shortid.generate(),
             name,
             number,
         };
@@ -43,13 +50,11 @@ export default function Form() {
             return Notiflix.Notify.failure(
                 'Enter valid 13 digits number / Введите корректный 13-ти значный номер'
             );
-        dispatch(addContacts(contact));
-        reset();
-    };
+        // createContact(contact);
 
-    useEffect(() => {
-        setIsDisabled(false);
-        const contactFinder = contacts.find(
+        // reset();
+
+        const contactFinder = data.find(
             contact =>
                 contact.name.toLowerCase() === name.toLowerCase() ||
                 contact.number === number
@@ -60,9 +65,13 @@ export default function Form() {
             Notiflix.Notify.warning(
                 `${name} ${number} is already in contacts / уже есть в списке ваших контактов.`
             );
+            return;
             // reset();
         }
-    }, [name, number, contacts]);
+        createContact(contact);
+
+        reset();
+    };
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
