@@ -54,14 +54,17 @@ export default function Form() {
 
         // reset();
 
+        // const contactFinder = data.find(
+        //     contact =>
+        //         contact.name.toLowerCase() === name.toLowerCase() ||
+        //         contact.number === number
+        // );
         const contactFinder = data.find(
-            contact =>
-                contact.name.toLowerCase() === name.toLowerCase() ||
-                contact.number === number
+            contact => contact.name === name || contact.number === number
         );
 
         if (contactFinder) {
-            setIsDisabled(true);
+            // setIsDisabled(true);
             Notiflix.Notify.warning(
                 `${name} ${number} is already in contacts / уже есть в списке ваших контактов.`
             );
