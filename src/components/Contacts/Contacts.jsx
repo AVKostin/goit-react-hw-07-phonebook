@@ -1,28 +1,28 @@
-// import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { BsTelephone } from 'react-icons/bs';
 import { IoIosContact } from 'react-icons/io';
 import { useSelector } from 'react-redux';
-import { getFilter } from 'redux/contactsSlice';
+import { getFilter } from 'Redux/contactsSlice';
+import { SpinnerInfinity } from 'spinners-react';
 import {
     useGetContactsQuery,
     useDeleteContactMutation,
-} from 'redux/contactsApi';
+} from 'Redux/contactsApi';
 
 const Contacts = () => {
-    const { data } = useGetContactsQuery();
-
+    const { data, isFetching } = useGetContactsQuery();
     const [deleteContact] = useDeleteContactMutation();
 
     const filter = useSelector(getFilter);
 
     const filteredContacts = () => {
         return data.filter(contact =>
-            contact.name.toLowerCase().includes(filter.toLowerCase().trim)
+            contact.name.toLowerCase().includes(filter.toLowerCase().trim())
         );
     };
     let rendered = filter === '' ? data : filteredContacts();
+
     return (
         <>
             <ul className={styles.contactsList}>
@@ -37,7 +37,6 @@ const Contacts = () => {
                                 <span> : </span>
                                 {number}
                             </span>
-
                             <button
                                 className={styles.buttons}
                                 onClick={() => deleteContact(id)}
@@ -54,20 +53,13 @@ const Contacts = () => {
                     no contacts available
                 </p>
             )}
+            {isFetching && (
+                <SpinnerInfinity
+                    style={{ marginTop: '20px', color: 'white' }}
+                />
+            )}
         </>
     );
 };
 
-// Contacts.propTypes = {
-//     filter: PropTypes.string,
-//     contacts: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             name: PropTypes.string.isRequired,
-//             number: PropTypes.string.isRequired,
-//             id: PropTypes.string.isRequired,
-//         })
-//     ),
-//     filteredContacts: PropTypes.func,
-//     deleteContact: PropTypes.func,
-// };
 export default Contacts;
