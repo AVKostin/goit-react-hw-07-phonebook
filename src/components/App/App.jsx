@@ -1,20 +1,21 @@
 import styles from './styles.module.css';
-import { FaJournalWhills } from 'react-icons/fa';
+import { BsJournalBookmark } from 'react-icons/bs';
 import Form from '../Form';
-import Contacts from 'components/Contacts';
-import Filter from 'components/Filter';
+import Contacts from '../Contacts';
+import Filter from '../Filter';
 
-export default function App() {
-    return (
-        <div className={styles.wrapper}>
-            <h1 className={styles.h1}>
-                <FaJournalWhills size={28} className={styles.icon} />
-                Phonebook
-            </h1>
-            <Form />
-            <h2>Contacts</h2>
-            <Filter />
-            <Contacts />
-        </div>
-    );
-}
+const App = () => {
+  return (
+    <div className={styles.wrapper}>
+      <h1>
+        Phonebook <BsJournalBookmark size={35} className={styles.icon} />
+      </h1>
+      <Form />
+      <h2>Contacts</h2>
+      <Filter />
+      <Contacts />
+    </div>
+  );
+};
+
+export default App;
