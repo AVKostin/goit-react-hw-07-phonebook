@@ -1,12 +1,12 @@
 import styles from './styles.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter, getFilter } from 'redux/contactsSlice';
+import { setFilter, getFilter } from 'Redux/contactsSlice';
 
-const Filter = () => {
+export default function Filter() {
     const dispatch = useDispatch();
     const filter = useSelector(getFilter);
 
-    // const handleFilterChange = e => dispatch(setFilter(e.currentTarget));
+    const handleFilterChange = e => dispatch(setFilter(e.currentTarget.value));
 
     return (
         <div className={styles.wrapper}>
@@ -15,9 +15,8 @@ const Filter = () => {
                 className={styles.filter}
                 name="filter"
                 value={filter}
-                onChange={e => dispatch(setFilter(e.currentTarget.value))}
+                onChange={handleFilterChange}
             />
         </div>
     );
-};
-export default Filter;
+}
