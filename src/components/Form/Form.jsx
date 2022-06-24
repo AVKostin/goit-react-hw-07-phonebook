@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { TiUserAddOutline } from 'react-icons/ti';
 import Notiflix from 'notiflix';
 import styles from './styles.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import {
     useCreateContactMutation,
     useGetContactsQuery,
-} from 'redux/contactsApi';
+} from 'Redux/contactsApi';
 
 Notiflix.Notify.init({
     position: 'center-top',
@@ -50,15 +50,7 @@ export default function Form() {
             return Notiflix.Notify.failure(
                 'Enter valid 13 digits number / Введите корректный 13-ти значный номер'
             );
-        // createContact(contact);
 
-        // reset();
-
-        // const contactFinder = data.find(
-        //     contact =>
-        //         contact.name.toLowerCase() === name.toLowerCase() ||
-        //         contact.number === number
-        // );
         const contactFinder = data.find(
             contact => contact.name === name || contact.number === number
         );
@@ -117,13 +109,13 @@ export default function Form() {
     );
 }
 
-// Form.propTypes = {
-//     addContact: PropTypes.func,
-//     contacts: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             name: PropTypes.string.isRequired,
-//             number: PropTypes.string.isRequired,
-//             id: PropTypes.string.isRequired,
-//         })
-//     ),
-// };
+Form.propTypes = {
+    addContact: PropTypes.func,
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+        })
+    ),
+};
