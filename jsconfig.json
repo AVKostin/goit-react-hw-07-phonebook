@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "baseUrl": "src"
-    },
-    "include": ["src", "_src/redux/contactsApi.js"]
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
 }
