@@ -1,10 +1,10 @@
 import styles from './styles.module.css';
-import { MdOutlineDeleteForever } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 import { BsTelephone } from 'react-icons/bs';
 import { IoIosContact } from 'react-icons/io';
-import { useSelector } from 'react-redux';
 import { getFilter } from 'Redux/contactsSlice';
 import { SpinnerInfinity } from 'spinners-react';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 import {
     useGetContactsQuery,
     useDeleteContactMutation,
@@ -12,6 +12,7 @@ import {
 
 const Contacts = () => {
     const { data, isFetching } = useGetContactsQuery();
+
     const [deleteContact] = useDeleteContactMutation();
 
     const filter = useSelector(getFilter);
