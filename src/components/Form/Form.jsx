@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
+import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
 import { TiUserAddOutline } from 'react-icons/ti';
 import Notiflix from 'notiflix';
-import styles from './styles.module.css';
-import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import {
     useCreateContactMutation,
