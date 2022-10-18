@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .wrapper h1 {
@@ -30,5 +29,4 @@ input {
   margin-left: 10px;
   margin-right: 10px;
   color: #b84f0b;
-
 }
