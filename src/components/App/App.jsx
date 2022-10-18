@@ -1,8 +1,8 @@
-import styles from './styles.module.css';
-import { FaJournalWhills } from 'react-icons/fa';
-import Form from '../Form';
-import Contacts from '../Contacts';
-import Filter from '../Filter';
+import Form from "../Form";
+import Filter from "../Filter";
+import Contacts from "../Contacts";
+import styles from "./styles.module.css";
+import { FaJournalWhills } from "react-icons/fa";
 
 const App = () => {
     return (
@@ -18,5 +18,4 @@ const App = () => {
         </div>
     );
 };
-
 export default App;
